@@ -12,6 +12,13 @@ body {
   height: 400px;
   display: flex;
   flex-wrap: wrap;
+  margin-right: 30px;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    margin-right: 0;
+  }
 }
 
 .grid div {

@@ -6,7 +6,7 @@ for (let i = 1; i <= 200; i++) {
 for (let i = 1; i <= 10; i++) {
   var div = document.createElement('div');
   div.className = 'taken';
-  div.style.backgroundImage = 'url(images/blue_block.png)';
+  div.style.backgroundImage = 'url(images/blue_block)';
   grid.appendChild(div);
 }
 let squares = Array.from(document.querySelectorAll('.grid div'));

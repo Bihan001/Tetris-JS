@@ -18,6 +18,7 @@ const downBtn = document.querySelector('#down-button');
 const rotateBtn = document.querySelector('#rotate-button');
 const _gameOver = document.querySelector('#game-over');
 let timerID;
+let isPlaying = false;
 let score = 0;
 const width = 10;
 
@@ -96,28 +97,30 @@ const undraw = () => {
 // timerID = setInterval(moveDown, 500);
 
 document.addEventListener('keydown', (event) => {
-  switch (event.key) {
-    case 'ArrowLeft':
-      moveLeft();
-      break;
-    case 'ArrowRight':
-      moveRight();
-      break;
-    case 'ArrowDown':
-      moveDown();
-      break;
-    case 'r':
-      rotate();
-      break;
-    default:
-      null;
+  if (isPlaying) {
+    switch (event.key) {
+      case 'ArrowLeft':
+        moveLeft();
+        break;
+      case 'ArrowRight':
+        moveRight();
+        break;
+      case 'ArrowDown':
+        moveDown();
+        break;
+      case 'r':
+        rotate();
+        break;
+      default:
+        null;
+    }
   }
 });
 
-leftBtn.addEventListener('click', () => moveLeft());
-rightBtn.addEventListener('click', () => moveRight());
-downBtn.addEventListener('click', () => moveDown());
-rotateBtn.addEventListener('click', () => rotate());
+leftBtn.addEventListener('click', () => (isPlaying ? moveLeft() : null));
+rightBtn.addEventListener('click', () => (isPlaying ? moveRight() : null));
+downBtn.addEventListener('click', () => (isPlaying ? moveDown() : null));
+rotateBtn.addEventListener('click', () => (isPlaying ? rotate() : null));
 
 function moveDown() {
   undraw();
@@ -180,7 +183,9 @@ startBtn.addEventListener('click', () => {
   if (timerID) {
     clearInterval(timerID);
     timerID = null;
+    isPlaying = false;
   } else {
+    isPlaying = true;
     draw();
     timerID = setInterval(moveDown, 500);
   }
